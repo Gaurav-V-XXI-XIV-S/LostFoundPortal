@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.log
+.DS_Store
+static/uploads/lost/*
+static/uploads/found/*
+static/uploads/profiles/*
+!static/uploads/lost/.gitkeep
+!static/uploads/found/.gitkeep
+!static/uploads/profiles/.gitkeep

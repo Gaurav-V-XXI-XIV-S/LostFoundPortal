@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}My Reports{% endblock %}
+{% block content %}
+<main class="dashboard-layout">
+    {% include "components/dashboard_sidebar.html" %}
+    <section class="dashboard-main">
+        <div class="page-title compact"><span>Activity</span><h1>My reports and claims</h1></div>
+        {% include "components/report_grid.html" %}
+        <div class="panel mt-4">
+            <div class="panel-header"><h5>Claim History</h5></div>
+            {% for claim in claims %}
+                <div class="mini-row">
+                    <strong>{{ claim.lost_name }} &harr; {{ claim.found_name }}</strong>
+                    <span>{{ claim.similarity_score }}% | {{ claim.status }}</span>
+                </div>
+            {% else %}
+                <div class="empty-state">No claims submitted.</div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

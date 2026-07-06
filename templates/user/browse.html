@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Browse Reports{% endblock %}
+{% block content %}
+<main class="dashboard-layout">
+    {% include "components/dashboard_sidebar.html" %}
+    <section class="dashboard-main">
+        <div class="page-title compact"><span>Search</span><h1>Find reports</h1></div>
+        {% include "components/search_form.html" %}
+        {% include "components/report_grid.html" %}
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<main class="dashboard-layout">
+    {% include "components/dashboard_sidebar.html" %}
+    <section class="dashboard-main">
+        <div class="dashboard-top">
+            <div><span>Admin Control Center</span><h1>Portal analytics</h1></div>
+            <a class="btn btn-gradient" href="{{ url_for('admin.reports') }}"><i class="fa-solid fa-folder-open me-2"></i>Moderate Reports</a>
+        </div>
+        <div class="row g-4 mb-4">
+            <div class="col-lg-3 col-md-6"><div class="metric-card"><i class="fa-solid fa-users"></i><span>{{ stats.users }}</span><small>Total Users</small></div></div>
+            <div class="col-lg-3 col-md-6"><div class="metric-card red"><i class="fa-solid fa-circle-exclamation"></i><span>{{ stats.lost }}</span><small>Lost Reports</small></div></div>
+            <div class="col-lg-3 col-md-6"><div class="metric-card green"><i class="fa-solid fa-box-open"></i><span>{{ stats.found }}</span><small>Found Reports</small></div></div>
+            <div class="col-lg-3 col-md-6"><div class="metric-card purple"><i class="fa-solid fa-handshake"></i><span>{{ stats.claims }}</span><small>Claims</small></div></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="panel">
+                    <div class="panel-header"><h5>Category Distribution</h5></div>
+                    <canvas id="adminChart" data-categories='{{ categories|tojson }}'></canvas>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="panel">
+                    <div class="panel-header"><h5>Pending Claims</h5></div>
+                    {% for claim in claims[:6] %}
+                        <div class="mini-row">
+                            <strong>{{ claim.claimant_name }}</strong>
+                            <span>{{ claim.lost_name }} to {{ claim.found_name }} | {{ claim.status }}</span>
+                        </div>
+                    {% else %}
+                        <div class="empty-state">No claims yet.</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

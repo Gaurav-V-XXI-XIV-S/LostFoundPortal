@@ -1,0 +1,19 @@
+<aside class="dashboard-sidebar">
+    <div class="sidebar-brand">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>{{ "Admin" if session.get("role") == "admin" else "Workspace" }}</span>
+    </div>
+    {% if session.get("role") == "admin" %}
+        <a href="{{ url_for('admin.dashboard') }}"><i class="fa-solid fa-chart-line"></i>Overview</a>
+        <a href="{{ url_for('admin.users') }}"><i class="fa-solid fa-users"></i>Users</a>
+        <a href="{{ url_for('admin.reports') }}"><i class="fa-solid fa-folder-open"></i>Reports</a>
+        <a href="{{ url_for('admin.claims') }}"><i class="fa-solid fa-handshake"></i>Claims</a>
+    {% else %}
+        <a href="{{ url_for('user.dashboard') }}"><i class="fa-solid fa-chart-pie"></i>Dashboard</a>
+        <a href="{{ url_for('user.report_lost') }}"><i class="fa-solid fa-circle-exclamation"></i>Report Lost</a>
+        <a href="{{ url_for('user.report_found') }}"><i class="fa-solid fa-box-open"></i>Report Found</a>
+        <a href="{{ url_for('user.browse') }}"><i class="fa-solid fa-filter"></i>Search</a>
+        <a href="{{ url_for('user.my_reports') }}"><i class="fa-solid fa-list-check"></i>My Reports</a>
+        <a href="{{ url_for('user.profile') }}"><i class="fa-solid fa-user-gear"></i>Profile</a>
+    {% endif %}
+</aside>

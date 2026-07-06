@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Smart AI Lost & Found Portal{% endblock %}
+{% block content %}
+<header class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <div class="row align-items-center min-vh-hero">
+            <div class="col-lg-7" data-aos="fade-up">
+                <span class="eyebrow">AI-powered campus recovery</span>
+                <h1>Smart AI Lost & Found Portal</h1>
+                <p class="lead">Report lost or found items, compare images with OpenCV, and manage claims through a polished SaaS-style dashboard.</p>
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a class="btn btn-gradient btn-lg" href="{{ url_for('auth.register') }}">Start Reporting</a>
+                    <a class="btn btn-light btn-lg" href="{{ url_for('public.search') }}">Browse Reports</a>
+                </div>
+            </div>
+            <div class="col-lg-5 mt-5 mt-lg-0" data-aos="zoom-in">
+                <div class="hero-panel">
+                    <div class="scan-line"></div>
+                    <i class="fa-solid fa-fingerprint hero-icon"></i>
+                    <h5>AI Match Confidence</h5>
+                    <div class="confidence-ring">92%</div>
+                    <p>ORB features and color histograms work together to rank possible matches.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="section-pad">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3 col-6" data-aos="fade-up">
+                    <div class="stat-card"><span>{{ stats.users or 0 }}</span><small>Users</small></div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="80">
+                    <div class="stat-card"><span>{{ stats.lost or 0 }}</span><small>Lost Reports</small></div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="160">
+                    <div class="stat-card"><span>{{ stats.found or 0 }}</span><small>Found Reports</small></div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="240">
+                    <div class="stat-card"><span>{{ stats.claims or 0 }}</span><small>Claims</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-pad pt-0">
+        <div class="container">
+            <div class="section-heading" data-aos="fade-up">
+                <span>Platform Features</span>
+                <h2>Everything needed for a serious lost and found system</h2>
+            </div>
+            <div class="row g-4">
+                {% for icon, title, text in [
+                    ("fa-camera-retro", "Image-Based Reporting", "Capture item details with structured forms and secure image uploads."),
+                    ("fa-brain", "OpenCV Matching", "ORB feature detection and histogram comparison generate confidence scores."),
+                    ("fa-chart-simple", "Analytics Dashboards", "Track reports, categories, claims, and activity with Chart.js widgets."),
+                    ("fa-shield-halved", "Admin Moderation", "Review users, remove fake reports, and manage claim decisions.")
+                ] %}
+                <div class="col-lg-3 col-md-6" data-aos="fade-up">
+                    <div class="feature-card">
+                        <i class="fa-solid {{ icon }}"></i>
+                        <h5>{{ title }}</h5>
+                        <p>{{ text }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-band">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <h2>Built for campuses, offices, events, and public venues.</h2>
+                    <p>The portal turns scattered lost-and-found posts into searchable, verified records with visual matching and claim workflows.</p>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row g-3">
+                        <div class="col-md-6" data-aos="fade-up">
+                            <div class="quote-card">"The matching page helped us verify likely returns in minutes instead of hours."<strong>Campus Admin</strong></div>
+                        </div>
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="120">
+                            <div class="quote-card">"Clean dashboard, easy forms, and confidence scores make it portfolio-ready."<strong>Project Mentor</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

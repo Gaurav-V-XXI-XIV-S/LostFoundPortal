@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Manage Claims{% endblock %}
+{% block content %}
+<main class="dashboard-layout">
+    {% include "components/dashboard_sidebar.html" %}
+    <section class="dashboard-main">
+        <div class="page-title compact"><span>Admin</span><h1>Claim review</h1></div>
+        <div class="panel table-responsive">
+            <table class="table align-middle">
+                <thead><tr><th>Claimant</th><th>Lost Item</th><th>Found Item</th><th>Similarity</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody>
+                    {% for claim in claims %}
+                    <tr>
+                        <td>{{ claim.claimant_name }}</td>
+                        <td>{{ claim.lost_name }}</td>
+                        <td>{{ claim.found_name }}</td>
+                        <td><span class="score-pill small">{{ claim.similarity_score }}%</span></td>
+                        <td>{{ claim.status }}</td>
+                        <td>
+                            <form class="d-flex gap-2" method="post" action="{{ url_for('admin.claim_status', claim_id=claim.id) }}">
+                                <select class="form-select form-select-sm" name="status">
+                                    {% for status in ["pending", "approved", "rejected"] %}
+                                        <option value="{{ status }}" {% if claim.status == status %}selected{% endif %}>{{ status }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button class="btn btn-sm btn-gradient" type="submit">Save</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="6"><div class="empty-state">No claims submitted.</div></td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}

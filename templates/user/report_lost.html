@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Report Lost Item{% endblock %}
+{% block content %}
+<main class="dashboard-layout">
+    {% include "components/dashboard_sidebar.html" %}
+    <section class="dashboard-main">
+        <div class="page-title compact"><span>Lost item</span><h1>Create a report</h1></div>
+        {% set date_label = "Date lost" %}
+        {% set date_name = "date_lost" %}
+        {% set submit_label = "Submit Lost Report" %}
+        {% include "components/item_form.html" %}
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,44 @@
+<form class="panel form-panel" method="post" enctype="multipart/form-data">
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="mb-3">
+                <label class="form-label">Item name</label>
+                <input class="form-control" name="item_name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" name="description" rows="5" required></textarea>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" name="category" required>
+                        <option value="">Choose</option>
+                        {% for category in ["Electronics", "Documents", "Keys", "Bags", "Jewellery", "Books", "Other"] %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">{{ date_label }}</label>
+                    <input class="form-control" type="date" name="{{ date_name }}" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Location</label>
+                    <input class="form-control" name="location" required>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <label class="form-label">Upload image</label>
+            <label class="upload-box">
+                <input type="file" name="image" accept="image/*" data-preview="itemPreview" required>
+                <img id="itemPreview" alt="Image preview">
+                <span><i class="fa-solid fa-cloud-arrow-up"></i>Choose image</span>
+            </label>
+        </div>
+    </div>
+    <div class="mt-4 d-flex justify-content-end">
+        <button class="btn btn-gradient" type="submit">{{ submit_label }}</button>
+    </div>
+</form>

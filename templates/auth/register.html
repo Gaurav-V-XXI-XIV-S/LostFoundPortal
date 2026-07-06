@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Create Account{% endblock %}
+{% block content %}
+<main class="auth-shell">
+    <div class="auth-card" data-aos="fade-up">
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-user-plus auth-icon"></i>
+            <h1>Create account</h1>
+            <p>Start reporting and tracking lost or found items.</p>
+        </div>
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">Full name</label>
+                <input class="form-control" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input class="form-control" type="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input class="form-control" name="phone">
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Password</label>
+                <input class="form-control" type="password" name="password" minlength="8" required>
+            </div>
+            <button class="btn btn-gradient w-100" type="submit">Create Account</button>
+        </form>
+        <p class="text-center mt-4 mb-0">Already registered? <a href="{{ url_for('auth.login') }}">Login</a></p>
+    </div>
+</main>
+{% endblock %}

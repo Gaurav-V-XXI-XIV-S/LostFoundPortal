@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}User Dashboard{% endblock %}
+{% block content %}
+<main class="dashboard-layout">
+    {% include "components/dashboard_sidebar.html" %}
+    <section class="dashboard-main">
+        <div class="dashboard-top">
+            <div>
+                <span>Good to see you</span>
+                <h1>{{ session.get("name") }}</h1>
+            </div>
+            <a class="btn btn-gradient" href="{{ url_for('user.report_lost') }}"><i class="fa-solid fa-plus me-2"></i>Report Lost</a>
+        </div>
+        <div class="row g-4 mb-4">
+            <div class="col-md-4"><div class="metric-card"><i class="fa-solid fa-circle-exclamation"></i><span>{{ counts.lost }}</span><small>Lost Items</small></div></div>
+            <div class="col-md-4"><div class="metric-card green"><i class="fa-solid fa-box-open"></i><span>{{ counts.found }}</span><small>Found Items</small></div></div>
+            <div class="col-md-4"><div class="metric-card purple"><i class="fa-solid fa-handshake"></i><span>{{ counts.matches }}</span><small>Claims</small></div></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="panel">
+                    <div class="panel-header"><h5>Report Analytics</h5></div>
+                    <canvas id="userChart" data-lost="{{ counts.lost }}" data-found="{{ counts.found }}" data-matches="{{ counts.matches }}"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="panel">
+                    <div class="panel-header"><h5>Recent Reports</h5></div>
+                    {% for report in reports %}
+                        <div class="mini-row">
+                            <strong>{{ report.item_name }}</strong>
+                            <span>{{ report.type }} | {{ report.status }}</span>
+                        </div>
+                    {% else %}
+                        <div class="empty-state">No reports yet.</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

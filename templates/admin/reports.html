@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Manage Reports{% endblock %}
+{% block content %}
+<main class="dashboard-layout">
+    {% include "components/dashboard_sidebar.html" %}
+    <section class="dashboard-main">
+        <div class="page-title compact"><span>Admin</span><h1>Moderate reports</h1></div>
+        {% include "components/search_form.html" %}
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="panel">
+                    <div class="panel-header"><h5>Lost Reports</h5></div>
+                    {% for item in lost_items %}
+                        <div class="moderation-row">
+                            <img src="{{ url_for('static', filename=item.image_path) }}" alt="{{ item.item_name }}">
+                            <div>
+                                <strong>{{ item.item_name }}</strong>
+                                <span>{{ item.owner_name }} | {{ item.location }}</span>
+                            </div>
+                            <form method="post" action="{{ url_for('admin.delete_report_route', report_type='lost', report_id=item.id) }}" onsubmit="return confirm('Delete this report?')">
+                                <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
+                    {% else %}
+                        <div class="empty-state">No lost reports.</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel">
+                    <div class="panel-header"><h5>Found Reports</h5></div>
+                    {% for item in found_items %}
+                        <div class="moderation-row">
+                            <img src="{{ url_for('static', filename=item.image_path) }}" alt="{{ item.item_name }}">
+                            <div>
+                                <strong>{{ item.item_name }}</strong>
+                                <span>{{ item.finder_name }} | {{ item.location }}</span>
+                            </div>
+                            <form method="post" action="{{ url_for('admin.delete_report_route', report_type='found', report_id=item.id) }}" onsubmit="return confirm('Delete this report?')">
+                                <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
+                    {% else %}
+                        <div class="empty-state">No found reports.</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

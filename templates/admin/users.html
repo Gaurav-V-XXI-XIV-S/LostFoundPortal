@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock %}
+{% block content %}
+<main class="dashboard-layout">
+    {% include "components/dashboard_sidebar.html" %}
+    <section class="dashboard-main">
+        <div class="page-title compact"><span>Admin</span><h1>Manage users</h1></div>
+        <div class="panel table-responsive">
+            <table class="table align-middle">
+                <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Role</th><th>Joined</th><th></th></tr></thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone or "-" }}</td>
+                        <td><span class="badge text-bg-{{ 'dark' if user.role == 'admin' else 'primary' }}">{{ user.role }}</span></td>
+                        <td>{{ user.created_at.strftime("%d %b %Y") if user.created_at else "-" }}</td>
+                        <td class="text-end">
+                            {% if user.role != "admin" %}
+                            <form method="post" action="{{ url_for('admin.delete_user_route', user_id=user.id) }}" onsubmit="return confirm('Delete this user?')">
+                                <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}

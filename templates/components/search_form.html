@@ -1,0 +1,26 @@
+<form class="filter-bar row g-3 align-items-end mb-4" method="get">
+    <div class="col-lg-3 col-md-6">
+        <label class="form-label">Item name</label>
+        <input class="form-control" name="q" value="{{ filters.q }}" placeholder="Wallet, phone, bag">
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <label class="form-label">Category</label>
+        <select class="form-select" name="category">
+            <option value="">All categories</option>
+            {% for category in ["Electronics", "Documents", "Keys", "Bags", "Jewellery", "Books", "Other"] %}
+                <option value="{{ category }}" {% if filters.category == category %}selected{% endif %}>{{ category }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <label class="form-label">Location</label>
+        <input class="form-control" name="location" value="{{ filters.location }}" placeholder="Library, canteen">
+    </div>
+    <div class="col-lg-2 col-md-6">
+        <label class="form-label">Date</label>
+        <input class="form-control" type="date" name="date" value="{{ filters.date }}">
+    </div>
+    <div class="col-lg-1 d-grid">
+        <button class="btn btn-gradient" type="submit"><i class="fa-solid fa-search"></i></button>
+    </div>
+</form>

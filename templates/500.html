@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Server Error{% endblock %}
+{% block content %}
+<main class="error-shell">
+    <h1>500</h1>
+    <p>Something went wrong while processing the request.</p>
+    <a class="btn btn-gradient" href="{{ url_for('public.home') }}">Go Home</a>
+</main>
+{% endblock %}

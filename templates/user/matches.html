@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}AI Match Results{% endblock %}
+{% block content %}
+<main class="dashboard-layout">
+    {% include "components/dashboard_sidebar.html" %}
+    <section class="dashboard-main">
+        <div class="page-title compact">
+            <span>AI Matching</span>
+            <h1>Possible matches for {{ lost_item.item_name }}</h1>
+        </div>
+        <div class="row g-4">
+            {% for match in matches %}
+            <div class="col-xl-6">
+                <div class="match-card">
+                    <div class="match-images">
+                        <img src="{{ url_for('static', filename=lost_item.image_path) }}" alt="Lost item">
+                        <img src="{{ url_for('static', filename=match.found.image_path) }}" alt="Found item">
+                    </div>
+                    <div class="match-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5>{{ match.found.item_name }}</h5>
+                            <span class="score-pill">{{ match.scores.similarity }}%</span>
+                        </div>
+                        <p>{{ match.found.description }}</p>
+                        <small>{{ match.found.location }} | {{ match.found.category }}</small>
+                        <div class="progress my-3">
+                            <div class="progress-bar" style="width: {{ match.scores.similarity }}%"></div>
+                        </div>
+                        <form method="post" action="{{ url_for('user.create_item_claim', lost_id=lost_item.id, found_id=match.found.id) }}">
+                            <input type="hidden" name="similarity" value="{{ match.scores.similarity }}">
+                            <textarea class="form-control mb-3" name="message" rows="2">I believe this found item matches my lost report.</textarea>
+                            <button class="btn btn-gradient w-100" type="submit">Claim This Item</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <div class="col-12"><div class="empty-state">No strong image matches were found yet. New found reports will improve matching coverage.</div></div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}
