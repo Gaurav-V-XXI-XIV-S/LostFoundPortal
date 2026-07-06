@@ -407,9 +407,9 @@ Add screenshots of:
 
 MCA Student | Full Stack Developer | Python & Java Developer
 
-GitHub: https://github.com/YOUR_USERNAME
+GitHub: https://github.com/ Gaurav-V-XXI-XIV-S
 
-LinkedIn: https://linkedin.com/in/YOUR_PROFILE
+LinkedIn: https://www.linkedin.com/in/gaurav-shelke-40689b345/
 
 ---
 
